@@ -1,4 +1,6 @@
 from db_connect import connect_to_database
+import customtkinter
+from PIL import Image
 
 
 def main_menu():
@@ -6,8 +8,6 @@ def main_menu():
     if conn is None:
         print("Can't connected to database.\n")
 
-        import customtkinter
-        from PIL import Image
 
     from volunteer import open_volunteer_window
     from event import open_event_window

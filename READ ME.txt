@@ -1,0 +1,11 @@
+Steps to make sure the Sql and Exe file works
+
+1. Restore the SQL file to a database know as database_Project
+
+2. Open the config.ini file and change the password to the password of your pgadmin database
+
+3. Run GSV.exe
+
+
+The username is admin
+The password is 123

@@ -73,13 +73,13 @@ def open_equipment_window(main_window):
     
     # Save Equipment Button
     def save_equipment():
-        
+        equipment_id = id_entry.get()
         description = desc_entry.get()
         value_text = value_entry.get()
         quantity_text = quantity_entry.get()
         selected_event = event_dropdown.get()
         
-        if  not description or not value_text or not quantity_text or not selected_event:
+        if  not equipment_id or not description or not value_text or not quantity_text or not selected_event:
             print("All fields are required!")
             return
         
@@ -105,15 +105,16 @@ def open_equipment_window(main_window):
             try:
                 cur = conn.cursor()
                 insert_query = """
-                    INSERT INTO equipment (description, value, quantity, event_code)
-                    VALUES (%s, %s, %s, %s)
+                    INSERT INTO equipment (equipment_id, description, value, quantity, event_code)
+                    VALUES (%s, %s, %s, %s, %s)
                 """
-                cur.execute(insert_query, (description, value, quantity, event_code))
+                cur.execute(insert_query, (equipment_id, description, value, quantity, event_code))
                 conn.commit()
                 print("Equipment added successfully!")
                 load_equipment()
                 # Clear input fields
                 
+                id_entry.delete(0, tk.END)
                 desc_entry.delete(0, tk.END)
                 value_entry.delete(0, tk.END)
                 quantity_entry.delete(0, tk.END)
@@ -331,7 +332,7 @@ def open_equipment_window(main_window):
                 cur.close()
                 conn.close()
 
-    summary_button = customtkinter.CTkButton(left_frame, text="Show Event Equipment Summary", command=show_event_equipment_summary)
+    summary_button = customtkinter.CTkButton(left_frame, text="Equipment Summary", command=show_event_equipment_summary)
     summary_button.pack(pady=10)
 
     def go_back():
